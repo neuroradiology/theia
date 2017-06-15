@@ -1,0 +1,20 @@
+make[1]: Entering directory '/tmp/gdb-8.0'
+make[2]: Entering directory '/tmp/gdb-8.0/libiberty'
+if [ x"" != x ]; then \
+  gcc -c -DHAVE_CONFIG_H -g -O2  -I. -I./../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  -D_GNU_SOURCE  ./simple-object-coff.c -o pic/simple-object-coff.o; \
+else true; fi
+if [ x"" != x ]; then \
+  gcc -c -DHAVE_CONFIG_H -g -O2  -I. -I./../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  -D_GNU_SOURCE   ./simple-object-coff.c -o noasan/simple-object-coff.o; \
+else true; fi
+gcc -c -DHAVE_CONFIG_H -g -O2  -I. -I./../include  -W -Wall -Wwrite-strings -Wc++-compat -Wstrict-prototypes -pedantic  -D_GNU_SOURCE ./simple-object-coff.c -o simple-object-coff.o
+./simple-object-coff.c:20:21: fatal error: configz.h: No such file or directory
+compilation terminated.
+Makefile:1253: recipe for target 'simple-object-coff.o' failed
+make[2]: *** [simple-object-coff.o] Error 1
+make[2]: Leaving directory '/tmp/gdb-8.0/libiberty'
+Makefile:7040: recipe for target 'all-libiberty' failed
+make[1]: *** [all-libiberty] Error 2
+make[1]: Leaving directory '/tmp/gdb-8.0'
+Makefile:849: recipe for target 'all' failed
+make: *** [all] Error 2
+

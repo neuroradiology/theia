@@ -123,7 +123,7 @@
     },
     "@types/express-serve-static-core": {
       "version": "4.0.46",
-      "from": "@types/express-serve-static-core@4.0.46",
+      "from": "@types/express-serve-static-core@*",
       "resolved": "https://registry.npmjs.org/@types/express-serve-static-core/-/express-serve-static-core-4.0.46.tgz"
     },
     "@types/fs-extra": {
@@ -2356,6 +2356,11 @@
       "from": "gaze@>=0.5.1 <0.6.0",
       "resolved": "https://registry.npmjs.org/gaze/-/gaze-0.5.2.tgz",
       "dev": true
+    },
+    "gcc-output-parser": {
+      "version": "0.0.3",
+      "from": "gcc-output-parser@0.0.3",
+      "resolved": "https://registry.npmjs.org/gcc-output-parser/-/gcc-output-parser-0.0.3.tgz"
     },
     "get-caller-file": {
       "version": "1.0.2",
