@@ -31,6 +31,21 @@ export namespace BuildUtils {
         });
     }
 
+    /** Captures build output and returns it once build done */
+    export function waitForBuildLogDone(eventHandler: Events.EventEmitter) {
+        let buff: String = ''
+
+        return new Promise<String>((resolve, reject) => {
+            eventHandler.on('build-output', (str: String) => {
+                buff += str.toString()
+            });
+            eventHandler.on('build-done', () => {
+                // console.log(buff)
+                resolve(buff);
+            })
+        });
+    }
+
     export function startWithInput(str: string,
         start: (inStream: Stream.Readable, outStream: Stream.PassThrough) => void): void {
 
