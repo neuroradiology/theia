@@ -1,62 +1,73 @@
 {
   "private": true,
-  "name": "browser-example",
-  "version": "0.0.1-alpha.1",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "theia-core": "latest"
+  "name": "@theia/example-browser",
+  "version": "1.0.0",
+  "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
+  "theia": {
+    "frontend": {
+      "config": {
+        "applicationName": "Theia Browser Example",
+        "preferences": {
+          "files.enableTrash": false
+        }
+      }
+    }
   },
-  "localDependencies": {
-    "theia-core": "../.."
+  "dependencies": {
+    "@theia/api-samples": "^1.0.0",
+    "@theia/callhierarchy": "^1.0.0",
+    "@theia/console": "^1.0.0",
+    "@theia/core": "^1.0.0",
+    "@theia/debug": "^1.0.0",
+    "@theia/editor": "^1.0.0",
+    "@theia/editor-preview": "^1.0.0",
+    "@theia/file-search": "^1.0.0",
+    "@theia/filesystem": "^1.0.0",
+    "@theia/getting-started": "^1.0.0",
+    "@theia/git": "^1.0.0",
+    "@theia/json": "^1.0.0",
+    "@theia/keymaps": "^1.0.0",
+    "@theia/languages": "^1.0.0",
+    "@theia/markers": "^1.0.0",
+    "@theia/messages": "^1.0.0",
+    "@theia/metrics": "^1.0.0",
+    "@theia/mini-browser": "^1.0.0",
+    "@theia/monaco": "^1.0.0",
+    "@theia/navigator": "^1.0.0",
+    "@theia/outline-view": "^1.0.0",
+    "@theia/output": "^1.0.0",
+    "@theia/plugin-dev": "^1.0.0",
+    "@theia/plugin-ext": "^1.0.0",
+    "@theia/plugin-ext-vscode": "^1.0.0",
+    "@theia/plugin-metrics": "^1.0.0",
+    "@theia/preferences": "^1.0.0",
+    "@theia/preview": "^1.0.0",
+    "@theia/process": "^1.0.0",
+    "@theia/scm": "^1.0.0",
+    "@theia/scm-extra": "^1.0.0",
+    "@theia/search-in-workspace": "^1.0.0",
+    "@theia/task": "^1.0.0",
+    "@theia/terminal": "^1.0.0",
+    "@theia/typehierarchy": "^1.0.0",
+    "@theia/userstorage": "^1.0.0",
+    "@theia/variable-resolver": "^1.0.0",
+    "@theia/vsx-registry": "^1.0.0",
+    "@theia/workspace": "^1.0.0"
   },
   "scripts": {
-    "bootstrap": "npm install ../../config/local-dependency-manager && npm run localinstall",
-    "build": "npm run build:localdeps && npm run build:frontend",
-    "build:frontend": "webpack --target web && cp src-gen/frontend/index.html lib",
-    "build:localdeps": "ldm run build && ldm sync --original-sources",
-    "clean": "rimraf lib",
-    "cold:start": "npm run clean && npm run build && npm start",
-    "localinstall": "ldm install --dev --original-sources",
-    "prepare": "npm run clean && npm run build",
-    "start": "concurrently --names backend,webpack-server --prefix \"[{name}]\" \"npm run start:backend\" \"npm run start:frontend\"",
-    "start:backend": "node ./src-gen/backend/main.js | bunyan",
-    "start:backend:debug": "node ./src-gen/backend/main.js --loglevel=debug | bunyan",
-    "start:frontend": "webpack-dev-server --open",
-    "test:ui": "wdio wdio.conf.js",
-    "watch": "concurrently --names watch-deps,watch-frontend --prefix \"[{name}]\" \"npm run watch:localdeps\" \"npm run watch:frontend\"",
-    "watch:frontend": "npm run build:frontend && webpack --target web --watch",
-    "watch:localdeps": "ldm watch --sync --run=watch --original-sources"
+    "prepare": "yarn run clean && yarn build",
+    "clean": "theia clean",
+    "build": "theia build --mode development",
+    "watch": "yarn build --watch",
+    "start": "theia start --plugins=local-dir:../../plugins",
+    "start:debug": "yarn start --log-level=debug",
+    "test": "theia test . --plugins=local-dir:../../plugins --test-spec=../api-tests/**/*.spec.js",
+    "test:debug": "yarn test --test-inspect",
+    "coverage": "yarn test --test-coverage && yarn coverage:report",
+    "coverage:report": "nyc report --reporter=html",
+    "coverage:clean": "rimraf .nyc_output && rimraf coverage"
   },
   "devDependencies": {
-    "@types/chai": "^3.5.1",
-    "@types/webdriverio": "^4.7.0",
-    "bunyan": "^1.8.10",
-    "chai": "^3.5.0",
-    "circular-dependency-plugin": "^2.0.0",
-    "concurrently": "^3.4.0",
-    "copy-webpack-plugin": "^4.0.1",
-    "css-loader": "^0.28.1",
-    "file-loader": "^0.11.1",
-    "font-awesome-webpack": "0.0.5-beta.2",
-    "less": "^2.7.2",
-    "local-dependency-manager": "../../config/local-dependency-manager",
-    "rimraf": "^2.6.1",
-    "selenium-standalone": "^6.2.0",
-    "source-map-loader": "^0.2.1",
-    "ts-node": "^3.0.2",
-    "tslint": "^4.5.1",
-    "typescript": "^2.4.1",
-    "url-loader": "^0.5.8",
-    "wdio-mocha-framework": "^0.5.9",
-    "wdio-phantomjs-service": "^0.2.2",
-    "wdio-selenium-standalone-service": "0.0.8",
-    "wdio-spec-reporter": "^0.1.0",
-    "webdriverio": "^4.6.2",
-    "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.5.0",
-    "webpack-merge": "^4.1.0"
-  },
-  "localDevDependencies": {
-    "local-dependency-manager": "../../config/local-dependency-manager"
+    "@theia/cli": "^1.0.0"
   }
 }

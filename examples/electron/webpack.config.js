@@ -1,8 +1,17 @@
-/*
- * Copyright (C) 2017 TypeFox and others.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+/**
+ * This file can be edited to customize webpack configuration.
+ * To reset delete this file and rerun theia build again.
  */
+// @ts-check
+const config = require('./gen-webpack.config.js');
 
-module.exports = require("theia-core/config/webpack/webpack.config.electron.dev")(__dirname);
+/**
+ * Expose bundled modules on window.theia.moduleName namespace, e.g.
+ * window['theia']['@theia/core/lib/common/uri'].
+ * Such syntax can be used by external code, for instance, for testing.
+config.module.rules.push({
+    test: /\.js$/,
+    loader: require.resolve('@theia/application-manager/lib/expose-loader')
+}); */
+
+module.exports = config;
